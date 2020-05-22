@@ -21,8 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blogapp.urls', namespace='blog'))
+    # конструирование путей к вьюшкам по полученным урлам в адресной строке:
+    path('', include('blogapp.urls', namespace='blog'))  # "переадресация" на файл urls из созданных нами приложений
 ]
 
+# конструкция для того, чтобы джанго нормально находил папку с media
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

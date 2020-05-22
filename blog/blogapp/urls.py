@@ -4,6 +4,7 @@ from blogapp import views  # импортируем вьюшки
 
 app_name = 'blogapp'
 
+# связываем вьюшки с адресами
 urlpatterns = [
     path('', views.main_view, name='index'),
     path('create/', views.create_post, name='create'),
