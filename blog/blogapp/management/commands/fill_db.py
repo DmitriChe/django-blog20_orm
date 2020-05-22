@@ -7,7 +7,7 @@ from blogapp.models import Category, Post, Tag
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        # Выбираем ВСЕ категории
+        # Выбираем ВСЕ категории и получает таким образом объект типа QuerySet типа списка и с доп. методами запросов
         categories = Category.objects.all()
         print(categories)
         print(type(categories))
@@ -18,22 +18,22 @@ class Command(BaseCommand):
 
         print('End')
 
-        # Выбрать ОДНУ категорию
+        # Выбрать ОДНУ категорию .get
         category = Category.objects.get(name='Игрушки')
         print(category)
         print(type(category))
 
-        # Несколько
+        # Несколько .filter
         category = Category.objects.filter(name='Игрушки')
         print(category)
         print(type(category))
 
-        # Первый пост
+        # Первый пост .first
         post = Post.objects.first()
 
         print(post)
 
-        # Связанные поля
+        # Связанные поля - получение значений связанных полей
         # ForeignKey
         print(post.category)
         print(type(post.category))
@@ -46,16 +46,16 @@ class Command(BaseCommand):
         print(post.tags.filter(name='Один'))
 
         # print(Tag.objects.first().posts.all())
-        # Создание
+        # Создание новой категории
         Category.objects.create(name='Новая', description='Что то')
 
-        # Изменение
+        # Изменение названия категории
         category = Category.objects.get(name='Новая')
         category.name = 'Измененная'
         category.save()
 
-        # Удаление
+        # Удаление категории
         # Можно одну,
         category.delete()
-        # можно несколько
+        # можно несколько и даже все...
         # Category.objects.all().delete()

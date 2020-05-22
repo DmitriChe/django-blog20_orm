@@ -2,8 +2,8 @@ from django.db import models
 
 
 # Create your models here.
-class Category(models.Model):
-    # Id не надо, он уже сам появиться
+class Category(models.Model):  # декларативное создание модели, вклачается ORM - отображение объектов на БД
+    # Id не надо, он уже сам появиться, а остальные поля модели прописываем: поле name и description
     name = models.CharField(max_length=16, unique=True)
     description = models.TextField(blank=True)
 
@@ -49,5 +49,11 @@ class Post(models.Model):
     # Связь с категорией
     # один - много
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # Связь с тегом
+    # Связь с тегом: много - много
     tags = models.ManyToManyField(Tag)
+    # Картинка
+    image = models.ImageField(upload_to='posts', null=True, blank=True)
+
+    # для красивого отображения названия модели в админке:
+    def __str__(self):
+        return self.name
