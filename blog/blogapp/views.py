@@ -13,7 +13,7 @@ def main_view(request):
     return render(request, 'blogapp/index.html', context={'posts': posts})
 
 
-def create_post(request):
+def contact_view(request):
     if request.method == 'POST':  # если данные переданы методом пост, т.е. через форму, то
         form = ContactForm(request.POST)  # получаем форму и загружаем в нее данные POST запроса (в виде словаря)
         if form.is_valid():
